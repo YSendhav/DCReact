@@ -114,7 +114,7 @@ const linksData = [
       },
   ];
   const linkDetail=  {
-    id: "5",
+    id: "1",
     customerName: "moahn doe",
     longUrl: "https://example.com/long-url-1",
     createdAt: "sep 30",

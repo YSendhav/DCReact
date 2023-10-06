@@ -20,6 +20,7 @@ import { BsArrowReturnRight, BsThreeDots } from "react-icons/bs";
 import ATMSwitchButton from "../../component/atom/ATMTextField/ATMSwitchButton/ATMSwitchButton";
 import { PiArrowElbowDownRightBold } from "react-icons/pi";
 import { ImQrcode } from "react-icons/im";
+import { IoCloseOutline } from "react-icons/io5";
 const customStyles = makeStyles({
   radio: {
     "& .MuiSvgIcon-root": {
@@ -58,7 +59,7 @@ type Props = {
 const LiveSongLinks = ({ linksData, linkDetail }: Props) => {
   const classes = customStyles();
   const [selectedValue, setSelectedValue] = useState("option1");
-  const [isSideCardOpen, setIsSideCardOpen] = useState([]); // State for controlling side card visibility
+  const [isSideCardOpen, setIsSideCardOpen] = useState<string | null>(null);// State for controlling side card visibility
   const [selectedLinkId, setSelectedLinkId] = useState<string | null>(null);
   const [checkedLinks, setCheckedLinks] = useState(
     linksData.map((_, index) => (index === 0 ? true : false))
@@ -66,6 +67,9 @@ const LiveSongLinks = ({ linksData, linkDetail }: Props) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(true); // State for controlling drawer visibility
   const handleRadioChange = (event: any) => {
     setSelectedValue(event.target.value);
+  };
+  const handleClose = () => {
+    setIsDrawerOpen(false);
   };
   useEffect(() => {
     // Reset checkbox state when the drawer is closed
@@ -94,18 +98,21 @@ const LiveSongLinks = ({ linksData, linkDetail }: Props) => {
     });
 
     setCheckedLinks(newCheckedLinks);
-    console.log("selectedID",)
+    console.log("link",link)
+   
     if (window.innerWidth < 640) {
       setIsDrawerOpen(true);
       setSelectedLinkId(link?.id);
       
     } else {
-      setIsSideCardOpen(link?.id);
+      setIsSideCardOpen(link);
+      console.log("selectedID",link)
     }
   };
   return (
     <div className="h-full w-full ">
       <div className="w-full h-full">
+        {/* HEADER FOR LINK PAGE ------------------------------------------------------ */}
         <div className="flex flex-col gap-3 border-gray-300 border p-5 w-full">
           <div className="flex sm:flex-row gap-5 flex-col flex justify-between  sm:items-center">
             <div className=" flex gap-3 items-center">
@@ -160,7 +167,9 @@ const LiveSongLinks = ({ linksData, linkDetail }: Props) => {
             </button>
           </div>
         </div>
+       
         <div className="flex sm:flex-row flex-col  bg-slate-100 w-full h-full">
+           {/* ALL LINK DATA------------------------------------------------------- */}
           <div
             className={`border-r border-divider border-gray-300 sm:w-[250px] md:w-[300px] w-full h-full flex flex-col overflow-auto`}
           >
@@ -209,81 +218,84 @@ const LiveSongLinks = ({ linksData, linkDetail }: Props) => {
               })}
             </div>
           </div>
+          {/* LINK DETAIL DATA FOR DEKSTOP VIEW -------------------------------------------------- */}
+         {/* {isSideCardOpen ===linkDetail?.id &&  */}
           <div className="flex-1 p-8 hidden md:inline">
-            <div className="">
-              <div className="flex flex-col gap-8 w-full h-full">
-                <div className="bg-white p-5">
-                  <div className="flex flex-col gap-3 rounded-md">
-                    <div className="flex justify-between ">
-                      <div className="flex items-center  text-[15px] font-medium">
-                        <span className="text-red-500 text-[22px] sm:[25px] md:[29px]">
-                          <GoDotFill />
-                        </span>{" "}
-                      {linkDetail?.planDetails?.type}
-                      </div>
-                      <div className="flex gap-2">
-                        <button className="flex text-[14px] gap-1 font-medium bg-[#EDF2FF] border items-center p-2 pb-1 rounded-md">
-                          <MdModeEdit className="" />
-                          <span>Edit</span>
-                        </button>
-                        <button className="p-2 border rounded-md">
-                          <BsThreeDots />
-                        </button>
-                      </div>
+          <div className="">
+            <div className="flex flex-col gap-8 w-full h-full">
+              <div className="bg-white p-5">
+                <div className="flex flex-col gap-3 rounded-md">
+                  <div className="flex justify-between ">
+                    <div className="flex items-center  text-[15px] font-medium">
+                      <span className="text-red-500 text-[22px] sm:[25px] md:[29px]">
+                        <GoDotFill />
+                      </span>{" "}
+                    {linkDetail?.planDetails?.type}
                     </div>
-                    <div className="flex items-center gap-2 text-gray-500 text-[14px]">
-                      <span className="text-black text-[16px]">
-                        <MdDateRange />{" "}
-                      </span>
-                      {linkDetail?.createdAt} by {linkDetail?.customerName}
-                    </div>
-                    <div className="flex items-center gap-2 text-gray-500 text-[12px]">
-                      <span className="text-black text-[16px]">
-                        <SiAudiomack />
-                      </span>
-                      0 total engagments
+                    <div className="flex gap-2">
+                      <button className="flex text-[14px] gap-1 font-medium bg-[#EDF2FF] border items-center p-2 pb-1 rounded-md">
+                        <MdModeEdit className="" />
+                        <span>Edit</span>
+                      </button>
+                      <button className="p-2 border rounded-md">
+                        <BsThreeDots />
+                      </button>
                     </div>
                   </div>
+                  <div className="flex items-center gap-2 text-gray-500 text-[14px]">
+                    <span className="text-black text-[16px]">
+                      <MdDateRange />{" "}
+                    </span>
+                    {linkDetail?.createdAt} by {linkDetail?.customerName}
+                  </div>
+                  <div className="flex items-center gap-2 text-gray-500 text-[12px]">
+                    <span className="text-black text-[16px]">
+                      <SiAudiomack />
+                    </span>
+                    0 total engagments
+                  </div>
                 </div>
-                <div className="bg-[#F3F6F9]">
-                  <div className="bg-white  p-4">
-                    <div className="flex justify-between ">
-                      <a
-                        href="/bit.ly/HariGovinda"
-                        className="font-bold text-[#2E5DD7] text-[16px] "
-                      >
-                        bit.ly/{linkDetail?.customer?.name}
-                      </a>
-                      <div className="flex gap-2">
-                        <button className="flex text-[14px] gap-1 font-medium bg-[#EDF2FF] border items-center p-2 pb-1 rounded-md">
-                          <MdContentCopy className="" />
-                          <span>Copy</span>
-                        </button>
-                        <button className="p-2 border rounded-md">
-                          <BsThreeDots />
-                        </button>
-                      </div>
+              </div>
+              <div className="bg-[#F3F6F9]">
+                <div className="bg-white  p-4">
+                  <div className="flex justify-between ">
+                    <a
+                      href="/bit.ly/HariGovinda"
+                      className="font-bold text-[#2E5DD7] text-[16px] "
+                    >
+                      bit.ly/{linkDetail?.customer?.name}
+                    </a>
+                    <div className="flex gap-2">
+                      <button className="flex text-[14px] gap-1 font-medium bg-[#EDF2FF] border items-center p-2 pb-1 rounded-md">
+                        <MdContentCopy className="" />
+                        <span>Copy</span>
+                      </button>
+                      <button className="p-2 border rounded-md">
+                        <BsThreeDots />
+                      </button>
                     </div>
-                    <div className="text-[14px] text-gray-600">
-                      {linkDetail?.customer?.clickCount} clicks
-                    </div>
-                    <div className="flex text-[14px] text-gray-700 items-center gap-2 font-medium p">
-                      <BsArrowReturnRight />
-                      <a href="https://www.youTube.coms py-2">
-                        {linkDetail?.longUrl}
-                      </a>
-                      <BiSolidLock />
-                      <span className="text-gray-300">Redirect</span>
-                    </div>
-                    <div className="text-[16px] font-bold flex justify-between py-2">
-                      <div>QR Code</div>
-                      <div>Link-in-bio</div>
-                    </div>
+                  </div>
+                  <div className="text-[14px] text-gray-600">
+                    {linkDetail?.customer?.clickCount} clicks
+                  </div>
+                  <div className="flex text-[14px] text-gray-700 items-center gap-2 font-medium p">
+                    <BsArrowReturnRight />
+                    <a href="https://www.youTube.coms py-2">
+                      {linkDetail?.longUrl}
+                    </a>
+                    <BiSolidLock />
+                    <span className="text-gray-300">Redirect</span>
+                  </div>
+                  <div className="text-[16px] font-bold flex justify-between py-2">
+                    <div>QR Code</div>
+                    <div>Link-in-bio</div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+          {/* DIALOG BOX DATA  OD LINK DETAIL FOR MOBILE VIEW */}
           {isDrawerOpen && (
             <div>
               <Dialog
@@ -296,11 +308,18 @@ const LiveSongLinks = ({ linksData, linkDetail }: Props) => {
                 fullWidth
                 maxWidth="md"
               >
-                <div className="flex justify-center items-center bg-[#60606C] p-4">
-                  <h1 className="font-medium text-[18px] sm:text-[22px] text-blue-900 text-white">
-                    Link Details
-                  </h1>
-                </div>
+               <div className="flex justify-between items-center bg-[#60606C] p-4">
+                    <h1 className="font-medium text-[18px] sm:text-[24px] text-blue-900 text-white">
+                      Link Details
+                    </h1>
+                    <div
+                      onClick={handleClose}
+                      className="text-white text-[18px] sm:text-[24px]"
+                    >
+                      {" "}
+                      <IoCloseOutline />
+                    </div>
+                  </div>
                 <div className="bg-[#F3F6F9] p-3">
                   <DialogContent className="">
                     <>
