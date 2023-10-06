@@ -34,7 +34,7 @@ const YouTuberScreen = ({ loginProps }: Props) => {
                 href="https://www.youtube.com/"
                 className="font-medium sm:text-[35px] text-[26px] inline-block text-center bg-gradient-to-r from-pink-600 to-pink-400 bg-clip-text text-transparent"
               >
-                YouTubers!
+              VideoEditor!
               </a>
             </h1>
           </div>

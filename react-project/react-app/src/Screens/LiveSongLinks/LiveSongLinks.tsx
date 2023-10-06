@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Checkbox } from "@mui/material";
 import { BiSolidLock } from "react-icons/bi";
-import { TbArrowsUpDown } from "react-icons/tb";
+import { IoCloseOutline } from 'react-icons/io5';
 import { GoDotFill } from "react-icons/go";
+import { TbArrowsUpDown } from "react-icons/tb";
 import { SiAudiomack } from "react-icons/si";
 import { MdDateRange, MdModeEdit } from "react-icons/md";
 import { MdContentCopy } from "react-icons/md";
@@ -98,11 +99,14 @@ const LiveSongLinks = ({ linksData, linkDetail }: Props) => {
     if (window.innerWidth < 640) {
       setIsDrawerOpen(true);
       setSelectedLinkId(link?.id);
-      
+
     } else {
       setIsSideCardOpen(link?.id);
     }
   };
+  const handleClose = () => {
+    setIsDrawerOpen(false);
+  }
   return (
     <div className="h-full w-full ">
       <div className="w-full h-full">
@@ -188,7 +192,7 @@ const LiveSongLinks = ({ linksData, linkDetail }: Props) => {
                         <div className="flex items-center  ">
                           <span className="text-red-500 text-[22px] ">
                             <GoDotFill />
-                          </span> 
+                          </span>
                           <span className="text-[15px] font-medium">{link?.planDetails?.type}</span>
                         </div>
                       </div>
@@ -219,7 +223,7 @@ const LiveSongLinks = ({ linksData, linkDetail }: Props) => {
                         <span className="text-red-500 text-[22px] sm:[25px] md:[29px]">
                           <GoDotFill />
                         </span>{" "}
-                      {linkDetail?.planDetails?.type}
+                        {linkDetail?.planDetails?.type}
                       </div>
                       <div className="flex gap-2">
                         <button className="flex text-[14px] gap-1 font-medium bg-[#EDF2FF] border items-center p-2 pb-1 rounded-md">
@@ -296,10 +300,12 @@ const LiveSongLinks = ({ linksData, linkDetail }: Props) => {
                 fullWidth
                 maxWidth="md"
               >
-                <div className="flex justify-center items-center bg-[#60606C] p-4">
-                  <h1 className="font-medium text-[18px] sm:text-[22px] text-blue-900 text-white">
+                <div className="flex justify-between items-center bg-[#60606C] p-4">
+                  <h1 className="font-medium text-[18px] sm:text-[24px] text-blue-900 text-white">
                     Link Details
                   </h1>
+                  <div onClick={handleClose} className="text-white text-[18px] sm:text-[24px]">  <IoCloseOutline /></div>
+
                 </div>
                 <div className="bg-[#F3F6F9] p-3">
                   <DialogContent className="">
@@ -312,7 +318,7 @@ const LiveSongLinks = ({ linksData, linkDetail }: Props) => {
                                 <GoDotFill />
                               </div>
                               <div className="font-medium text-[16px]">
-                              {linkDetail?.planDetails?.type}
+                                {linkDetail?.planDetails?.type}
                               </div>
                             </div>
                             <div className="flex gap-2 py-4 sm:py-0">
@@ -330,7 +336,7 @@ const LiveSongLinks = ({ linksData, linkDetail }: Props) => {
                               <MdDateRange />{" "}
                             </div>
                             <div>
-                            {moment(linkDetail?.createdAt).utcOffset('+05:30').format('MMMM D YYYY h:mm A [GMT+5:30]')} by {linkDetail?.customerName}
+                              {moment(linkDetail?.createdAt).utcOffset('+05:30').format('MMMM D YYYY h:mm A [GMT+5:30]')} by {linkDetail?.customerName}
                             </div>
                           </div>
                           <div className="flex items-center gap-2 text-gray-500 text-[14px] sm:text-[16px]">
