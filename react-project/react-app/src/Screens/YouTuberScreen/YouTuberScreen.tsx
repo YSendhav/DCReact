@@ -51,7 +51,7 @@ const Home = (props: Props) => {
               size="medium"
             />
             <div className="">
-              <button  className=" bg-gradient-to-r from-pink-500 to-purple-700 text-[12px] text-white rounded-full px-4 py-1">
+              <button className=" bg-gradient-to-r from-pink-500 to-purple-700 text-[12px] text-white rounded-full px-4 py-1">
                 Try Now
               </button>
             </div>
@@ -59,7 +59,7 @@ const Home = (props: Props) => {
           <div className="flex gap-2 py-4">
             <button
               className=" bg-gradient-to-r from-pink-700 to-pink-500 text-[12px] text-white rounded-full sm:px-6 py-1 px-2"
-  onClick={()=>{navigate("/liveSong")}}
+              onClick={() => { navigate("/liveSong") }}
             >
               Get started
             </button>
@@ -73,7 +73,7 @@ const Home = (props: Props) => {
             <ATMTextField
               name=""
               value={urlDomain}
-              onChange={(e)=>{setUrlDomain(e.target.value)}}
+              onChange={(e) => { setUrlDomain(e.target.value) }}
               label="Pastey a long URL Domain "
               placeholder="Example:http//super-long-link.com/shorten"
               className="p-1 border-gray-300 outline-none"
@@ -83,7 +83,7 @@ const Home = (props: Props) => {
               <ATMTextField
                 name=""
                 value={domain}
-                onChange={(e)=>{setDomain(e.target.value)}}
+                onChange={(e) => { setDomain(e.target.value) }}
                 label="Domain "
                 placeholder="bit/ly"
                 className="p-1 outline-none border-gray-300"
@@ -92,7 +92,7 @@ const Home = (props: Props) => {
               <ATMTextField
                 name=""
                 value={backhalf}
-                onChange={(e)=>{setBackhalf(e.target.value)}}
+                onChange={(e) => { setBackhalf(e.target.value) }}
                 className="p-1 outline-none border-gray-300"
                 label="Enter a back half"
                 size="medium"

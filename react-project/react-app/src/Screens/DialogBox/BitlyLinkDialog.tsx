@@ -23,7 +23,12 @@ const BitlyLinkDialog = () => {
 
     return (
         <div>
-            <button onClick={handleOpen} className="bg-[#2B5BD7] text-[12px] text-white py-2 px-4 rounded-md flex items-center">Sign up and get your Link</button>
+            <button
+                onClick={handleOpen}
+                className="bg-[#2B5BD7] text-[12px] text-white py-2 px-4 rounded-md flex items-center"
+            >
+                Sign up and get your Link
+            </button>
             <Dialog open={open} onClose={handleClose} className="">
                 <div className="border-l-2 border-[#2E5DD7]">
                     <DialogTitle className="flex justify-between">
