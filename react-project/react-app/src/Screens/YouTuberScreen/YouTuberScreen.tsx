@@ -24,21 +24,22 @@ const YouTuberScreen = ({ loginProps }: Props) => {
   };
   return (
     <>
-      <div className=" flex flex-col justify-center items-center h-screen bg-white gap-4">
+      <div className=" flex flex-col sm:justify-center items-center h-screen bg-white gap-4">
         <div className="sm:w-[600px] md:w-[800px] w-full xl:[1000px]  py-4 px-8">
-          <div className="sm:w-[350px] w-[250px] ">
+          <div className="w-full">
+            <div className="sm:text-[18px] text-blue-500 text-[16px] cursor-pointer text font-medium "><a href="/">Go to Video</a></div>
             <h1 className="font-medium md:text-[30px] sm:text-[26px] text-[24px]">
               {" "}
-              A simple link but a powerful tool for
-              <a
+              A simple link but a powerful tool for </h1>
+             <h1><a
                 href="https://www.youtube.com/"
                 className="font-medium sm:text-[35px] text-[26px] inline-block text-center bg-gradient-to-r from-pink-600 to-pink-400 bg-clip-text text-transparent"
               >
                 Video Editor!
               </a>
-            </h1>
+              </h1>
           </div>
-          <div className="sm:w-[400px] py-4 ">
+          <div className="w-full py-4 ">
             <p className="text-[14px] sm:text-[16px] ext-gray-600">
               Our tool allows you to seamlessly track your audience with simple
               and easy-to-remember yet powerful links and provide your customers
